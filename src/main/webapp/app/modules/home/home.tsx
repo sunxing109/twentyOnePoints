@@ -8,6 +8,7 @@ import { Row, Col, Alert } from 'reactstrap';
 
 import { IRootState } from 'app/shared/reducers';
 import { getSession } from 'app/shared/reducers/authentication';
+import ECharts from 'echarts-for-react';
 
 export interface IHomeProp extends StateProps, DispatchProps {}
 
@@ -18,12 +19,30 @@ export class Home extends React.Component<IHomeProp> {
 
   render() {
     const { account } = this.props;
+    const option2 = {
+      xAxis: {
+        type: 'category',
+        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+      },
+      yAxis: {
+        type: 'value'
+      },
+      series: [
+        {
+          data: [820, 932, 901, 934, 1290, 1330, 1320],
+          type: 'line'
+        }
+      ]
+    };
     return (
       <Row>
         <Col md="9">
           <h2>
             <Translate contentKey="home.title">Welcome, Java Hipster!</Translate>
           </h2>
+          <Alert color="secondary">
+            <ECharts option={option2} />
+          </Alert>
           <p className="lead">
             <Translate contentKey="home.subtitle">This is your homepage</Translate>
           </p>
